@@ -159,10 +159,53 @@ background:white;
 box-shadow:0 0 60px white;
 }
 
+ #fairyLights{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:4;
+}
+
+.light{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#FFD700;
+    box-shadow:
+        0 0 6px #FFD700,
+        0 0 12px #FFD700,
+        0 0 24px orange;
+    animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+
+0%{
+opacity:.2;
+transform:scale(.8);
+}
+
+50%{
+opacity:1;
+transform:scale(1.6);
+}
+
+100%{
+opacity:.3;
+transform:scale(.8);
+}
+
+}
+
+ 
+
 </style>
 </head>
 
 <body>
+
+ <div id="fairyLights"></div>
 
 <canvas id="stars"></canvas>
 
@@ -270,6 +313,31 @@ requestAnimationFrame(draw);
 }
 
 draw();
+
+ const fairy=document.getElementById("fairyLights");
+
+const branchPoints=[
+[42,28],[45,30],[48,31],[51,32],[54,34],
+[36,36],[40,39],[44,42],[48,45],[52,43],
+[58,40],[62,36],[39,49],[46,52],[54,51],
+[60,48],[43,58],[49,60],[55,58]
+];
+
+branchPoints.forEach((p,i)=>{
+
+let l=document.createElement("div");
+
+l.className="light";
+
+l.style.left=p[0]+"vw";
+
+l.style.top=p[1]+"vh";
+
+l.style.animationDelay=(Math.random()*2)+"s";
+
+fairy.appendChild(l);
+
+});
 
 </script>
 
