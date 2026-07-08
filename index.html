@@ -235,7 +235,42 @@ opacity:0;
 
 }
 
+#butterflies{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:6;
+}
 
+.butterfly{
+    position:absolute;
+    font-size:26px;
+    filter:drop-shadow(0 0 10px #ff66cc);
+    animation:fly linear forwards;
+}
+
+@keyframes fly{
+
+0%{
+transform:translate(-10vw,100vh) scale(.6) rotate(0deg);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+50%{
+transform:translate(45vw,40vh) scale(1) rotate(15deg);
+}
+
+100%{
+transform:translate(110vw,-10vh) scale(.8) rotate(-20deg);
+opacity:0;
+}
+
+}
  
 
 </style>
@@ -246,6 +281,9 @@ opacity:0;
  <div id="fairyLights"></div>
  
 <div id="petals"></div>
+
+ <div id="butterflies"></div>
+ 
 <canvas id="stars"></canvas>
 
 <div class="moon"></div>
@@ -403,6 +441,33 @@ function createPetal(){
 }
 
 setInterval(createPetal,220);
+
+ const butterflyBox=document.getElementById("butterflies");
+
+function createButterfly(){
+
+    const b=document.createElement("div");
+
+    b.className="butterfly";
+
+    b.innerHTML=Math.random()>0.5?"🦋":"🩷";
+
+    b.style.top=Math.random()*80+"vh";
+
+    b.style.animationDuration=(10+Math.random()*8)+"s";
+
+    b.style.fontSize=(20+Math.random()*20)+"px";
+
+    butterflyBox.appendChild(b);
+
+    setTimeout(()=>{
+        b.remove();
+    },18000);
+
+}
+
+setInterval(createButterfly,1800);
+ 
 
 </script>
 
