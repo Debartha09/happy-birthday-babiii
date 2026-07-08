@@ -198,6 +198,44 @@ transform:scale(.8);
 
 }
 
+ #petals{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:5;
+}
+
+.petal{
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:#d81b60;
+    border-radius:60% 0 60% 0;
+    opacity:.9;
+    box-shadow:0 0 8px rgba(255,80,120,.6);
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-10vh) rotate(0deg);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) translateX(120px) rotate(720deg);
+opacity:0;
+}
+
+}
+
+
  
 
 </style>
@@ -206,7 +244,8 @@ transform:scale(.8);
 <body>
 
  <div id="fairyLights"></div>
-
+ 
+<div id="petals"></div>
 <canvas id="stars"></canvas>
 
 <div class="moon"></div>
@@ -338,6 +377,32 @@ l.style.animationDelay=(Math.random()*2)+"s";
 fairy.appendChild(l);
 
 });
+
+ const petals=document.getElementById("petals");
+
+function createPetal(){
+
+    const p=document.createElement("div");
+
+    p.className="petal";
+
+    p.style.left=Math.random()*100+"vw";
+
+    p.style.animationDuration=(6+Math.random()*5)+"s";
+
+    p.style.animationDelay="0s";
+
+    p.style.transform="scale("+(0.5+Math.random())+")";
+
+    petals.appendChild(p);
+
+    setTimeout(()=>{
+        p.remove();
+    },11000);
+
+}
+
+setInterval(createPetal,220);
 
 </script>
 
