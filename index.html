@@ -271,6 +271,52 @@ opacity:0;
 }
 
 }
+ #loveBloomMessage{
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(.5);
+    font-size:48px;
+    font-weight:bold;
+    color:#FFD700;
+    text-shadow:
+        0 0 15px gold,
+        0 0 35px red;
+    opacity:0;
+    z-index:9999;
+    transition:.8s;
+    pointer-events:none;
+}
+
+#loveBloomMessage.show{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.2);
+}
+
+.bloomHeart{
+    position:fixed;
+    font-size:26px;
+    pointer-events:none;
+    animation:bloomHeart 3s linear forwards;
+}
+
+@keyframes bloomHeart{
+
+0%{
+opacity:1;
+transform:translate(0,0) scale(.4);
+}
+
+100%{
+opacity:0;
+transform:
+translate(
+calc((var(--x))*1px),
+calc((var(--y))*1px)
+)
+scale(2);
+}
+}
  
 
 </style>
@@ -287,6 +333,8 @@ opacity:0;
 <canvas id="stars"></canvas>
 
 <div class="moon"></div>
+<img id="lovePhoto" src="IMG_6670.jpeg" alt="My Love">
+ 
 
 <div class="title">
 <h1>🎂 Happy Birthday Babiii 🎂</h1>
@@ -467,9 +515,48 @@ function createButterfly(){
 }
 
 setInterval(createButterfly,1800);
+
+ const photo=document.getElementById("lovePhoto");
+const bloom=document.getElementById("loveBloomMessage");
+
+photo.addEventListener("click",()=>{
+
+    bloom.classList.add("show");
+
+    setTimeout(()=>{
+        bloom.classList.remove("show");
+    },2500);
+
+    for(let i=0;i<180;i++){
+
+        const h=document.createElement("div");
+
+        h.className="bloomHeart";
+
+        h.innerHTML="❤️";
+
+        h.style.left=(window.innerWidth/2)+"px";
+        h.style.top=(window.innerHeight/2)+"px";
+
+        h.style.setProperty("--x",(Math.random()*900)-450);
+        h.style.setProperty("--y",(Math.random()*900)-450);
+
+        document.body.appendChild(h);
+
+        setTimeout(()=>{
+            h.remove();
+        },3000);
+
+    }
+
+});
  
 
 </script>
+
+ <div id="loveBloomMessage">
+    ❤️ Forever & Always ❤️
+</div>
 
 </body>
 </html>
