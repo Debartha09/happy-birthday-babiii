@@ -1,44 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Happy Birthday Babiii</title>
+
 <style>
-html,body{margin:0;height:100%;overflow-x:hidden;font-family:Georgia,serif;background:radial-gradient(circle,#5a0014,#180006);color:#f8e7b5}
-body:before{content:"";position:fixed;inset:0;background:
-radial-gradient(circle at 20% 20%,rgba(255,215,0,.15),transparent 25%),
-radial-gradient(circle at 80% 30%,rgba(255,0,0,.15),transparent 25%)}
-.container{position:relative;z-index:2;max-width:900px;margin:auto;padding:40px;text-align:center}
-img{width:260px;max-width:80%;border-radius:20px;border:6px solid gold;box-shadow:0 0 25px gold}
-h1{font-size:3em;color:gold;text-shadow:0 0 12px red}
-h2{color:#ffb3b3}
-.letter{margin-top:30px;text-align:left;line-height:1.8;background:rgba(255,255,255,.08);padding:25px;border-radius:18px}
-.heart,.confetti,.fire{position:fixed;pointer-events:none}
-.heart{color:#ff4d6d;animation:float 8s linear infinite}
-.confetti{width:6px;height:10px;animation:fall 5s linear infinite}
-.fire{width:4px;height:4px;border-radius:50%;background:gold;box-shadow:0 0 12px gold;animation:boom 1.5s ease-out infinite}
-@keyframes float{from{transform:translateY(100vh)}to{transform:translateY(-10vh)}}
-@keyframes fall{from{transform:translateY(-10vh) rotate(0)}to{transform:translateY(110vh) rotate(720deg)}}
-@keyframes boom{0%{transform:scale(0)}50%{transform:scale(4);opacity:1}100%{transform:scale(8);opacity:0}}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    font-family:Georgia, serif;
+    background:
+        radial-gradient(circle at top, rgba(255,215,0,0.12), transparent 25%),
+        linear-gradient(to bottom, #090012, #1a001f 40%, #120000 100%);
+    color:white;
+}
+
+/* Moon */
+.moon{
+    position:absolute;
+    top:40px;
+    right:60px;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:radial-gradient(circle, #fff8dc, #f5d76e);
+    box-shadow:0 0 40px #ffd700, 0 0 80px rgba(255,215,0,0.6);
+    z-index:1;
+}
+
+/* Stars */
+.stars{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+/* Title */
+.title{
+    position:absolute;
+    top:20px;
+    width:100%;
+    text-align:center;
+    z-index:5;
+}
+
+.title h1{
+    font-size:3rem;
+    color:#ffd700;
+    text-shadow:0 0 10px #ff0000;
+}
+
+.title h2{
+    margin-top:8px;
+    color:#ffb6c1;
+    font-size:1.5rem;
+}
+
+/* Tree container */
+.tree-container{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Tree trunk */
+.trunk{
+    position:absolute;
+    bottom:0;
+    width:40px;
+    height:220px;
+    background:linear-gradient(to bottom, #5b3a1a, #2d1708);
+    border-radius:20px;
+    z-index:2;
+}
+
+/* Heart canopy */
+.canopy{
+    position:absolute;
+    bottom:180px;
+    width:420px;
+    height:380px;
+    z-index:3;
+}
+
+/* Individual heart */
+.heart{
+    position:absolute;
+    width:22px;
+    height:22px;
+    transform:rotate(-45deg);
+    animation:pulse 2s infinite ease-in-out;
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+}
+
+.heart::before{
+    top:-11px;
+    left:0;
+}
+
+.heart::after{
+    left:11px;
+    top:0;
+}
+
+.red,
+.red::before,
+.red::after{
+    background:#ff1744;
+}
+
+.pink,
+.pink::before,
+.pink::after{
+    background:#ff4d88;
+}
+
+.gold,
+.gold::before,
+.gold::after{
+    background:#ffd700;
+}
+
+@keyframes pulse{
+    0%,100%{transform:rotate(-45deg) scale(1);}
+    50%{transform:rotate(-45deg) scale(1.12);}
+}
+
+/* Crystal heart photo frame */
+.crystal-heart{
+    position:absolute;
+    bottom:250px;
+    width:170px;
+    height:170px;
+    transform:rotate(-45deg);
+    border:5px solid rgba(255,255,255,0.9);
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.9),
+        0 0 50px rgba(255,215,0,0.8),
+        inset 0 0 20px rgba(255,255,255,0.4);
+    z-index:6;
+    background:rgba(255,255,255,0.08);
+}
+
+.crystal-heart img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:rotate(45deg) scale(1.45);
+}
+
+/* Floating hearts */
+.float-heart{
+    position:absolute;
+    color:#ff4d6d;
+    font-size:18px;
+    animation:floatUp linear infinite;
+    z-index:1;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    to{
+        transform:translateY(-20vh);
+        opacity:0;
+    }
+}
+
+/* Bottom message */
+.bottom{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    color:#ffd700;
+    font-size:1.2rem;
+    z-index:5;
+}
+
+@media(max-width:768px){
+    .title h1{font-size:2.2rem;}
+    .canopy{
+        width:300px;
+        height:280px;
+        bottom:190px;
+    }
+    .crystal-heart{
+        width:140px;
+        height:140px;
+        bottom:250px;
+    }
+}
 </style>
 </head>
+
 <body>
-<div class="container">
-<h1>🎂 Happy Birthday Babiii 🎂</h1>
-<h2>I Love You ❤️</h2>
-<img src="IMG_6670.jpeg" alt="Our Memory">
-<div class="letter">
-<p>My Dearest Babiii,</p>
-<p>On your special day, I want you to know how deeply you are loved. Every smile of yours brightens my world, every conversation becomes a cherished memory, and every moment with you feels like a blessing. You are my comfort, my happiness, and my favorite person.</p>
-<p>I wish you endless laughter, good health, beautiful dreams, and all the success your heart desires. No matter where life takes us, I promise to keep appreciating you, respecting you, supporting you, and loving you with all my heart. Thank you for filling my life with warmth, kindness, and unforgettable moments.</p>
-<p>May this birthday be the beginning of another wonderful year full of love, adventures, and dreams coming true. You deserve nothing but the very best because you are truly one of a kind.</p>
-<p>Happy Birthday once again, my Babiii. ❤️ Forever and always, I love you.</p>
+
+<div class="moon"></div>
+<div class="stars" id="stars"></div>
+
+<div class="title">
+    <h1>🎂 Happy Birthday Babiii 🎂</h1>
+    <h2>I Love You ❤️ Forever & Always</h2>
 </div>
+
+<div class="tree-container">
+    <div class="trunk"></div>
+    <div class="canopy" id="canopy"></div>
+
+    <!-- Your photo will appear automatically -->
+    <div class="crystal-heart">
+        <img src="IMG_6670.jpeg" alt="Love Photo">
+    </div>
 </div>
+
+<div class="bottom">
+    ✨ A love that grows forever like this magical tree ✨
+</div>
+
 <script>
-for(let i=0;i<40;i++){let h=document.createElement('div');h.className='heart';h.innerHTML='❤';h.style.left=Math.random()*100+'vw';h.style.fontSize=(12+Math.random()*28)+'px';h.style.animationDuration=(5+Math.random()*6)+'s';document.body.appendChild(h);}
-for(let i=0;i<120;i++){let c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';c.style.background=['gold','red','#fff'][i%3];c.style.animationDelay=(Math.random()*5)+'s';document.body.appendChild(c);}
-setInterval(()=>{let f=document.createElement('div');f.className='fire';f.style.left=Math.random()*100+'vw';f.style.top=(10+Math.random()*50)+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500)},120);
+// Create stars
+const stars = document.getElementById('stars');
+for(let i=0;i<120;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.top = Math.random()*100 + 'vh';
+    s.style.animationDelay = Math.random()*2 + 's';
+    stars.appendChild(s);
+}
+
+// Create heart-shaped canopy
+const canopy = document.getElementById('canopy');
+
+for(let t=0; t<Math.PI*2; t+=0.12){
+    const x = 16*Math.pow(Math.sin(t),3);
+    const y = -(13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t));
+
+    const h = document.createElement('div');
+    h.className = 'heart ' + ['red','pink','gold'][Math.floor(Math.random()*3)];
+
+    h.style.left = (x*11 + 190) + 'px';
+    h.style.top  = (y*11 + 120) + 'px';
+    h.style.animationDelay = Math.random()*2 + 's';
+
+    canopy.appendChild(h);
+}
+
+// Floating hearts animation
+function createFloatingHeart(){
+    const h = document.createElement('div');
+    h.className = 'float-heart';
+    h.innerHTML = '❤';
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.animationDuration = (5 + Math.random()*5) + 's';
+    h.style.fontSize = (14 + Math.random()*20) + 'px';
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),10000);
+}
+
+setInterval(createFloatingHeart, 300);
 </script>
-</body></html>
+
+</body>
+</html>
+
