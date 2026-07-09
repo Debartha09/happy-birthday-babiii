@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday Babiii</title>
+<style>
+html,body{margin:0;height:100%;overflow-x:hidden;font-family:Georgia,serif;background:radial-gradient(circle,#5a0014,#180006);color:#f8e7b5}
+body:before{content:"";position:fixed;inset:0;background:
+radial-gradient(circle at 20% 20%,rgba(255,215,0,.15),transparent 25%),
+radial-gradient(circle at 80% 30%,rgba(255,0,0,.15),transparent 25%)}
+.container{position:relative;z-index:2;max-width:900px;margin:auto;padding:40px;text-align:center}
+img{width:260px;max-width:80%;border-radius:20px;border:6px solid gold;box-shadow:0 0 25px gold}
+h1{font-size:3em;color:gold;text-shadow:0 0 12px red}
+h2{color:#ffb3b3}
+.letter{margin-top:30px;text-align:left;line-height:1.8;background:rgba(255,255,255,.08);padding:25px;border-radius:18px}
+.heart,.confetti,.fire{position:fixed;pointer-events:none}
+.heart{color:#ff4d6d;animation:float 8s linear infinite}
+.confetti{width:6px;height:10px;animation:fall 5s linear infinite}
+.fire{width:4px;height:4px;border-radius:50%;background:gold;box-shadow:0 0 12px gold;animation:boom 1.5s ease-out infinite}
+@keyframes float{from{transform:translateY(100vh)}to{transform:translateY(-10vh)}}
+@keyframes fall{from{transform:translateY(-10vh) rotate(0)}to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes boom{0%{transform:scale(0)}50%{transform:scale(4);opacity:1}100%{transform:scale(8);opacity:0}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎂 Happy Birthday Babiii 🎂</h1>
+<h2>I Love You ❤️</h2>
+<img src="IMG_6670.jpeg" alt="Our Memory">
+<div class="letter">
+<p>My Dearest Babiii,</p>
+<p>On your special day, I want you to know how deeply you are loved. Every smile of yours brightens my world, every conversation becomes a cherished memory, and every moment with you feels like a blessing. You are my comfort, my happiness, and my favorite person.</p>
+<p>I wish you endless laughter, good health, beautiful dreams, and all the success your heart desires. No matter where life takes us, I promise to keep appreciating you, respecting you, supporting you, and loving you with all my heart. Thank you for filling my life with warmth, kindness, and unforgettable moments.</p>
+<p>May this birthday be the beginning of another wonderful year full of love, adventures, and dreams coming true. You deserve nothing but the very best because you are truly one of a kind.</p>
+<p>Happy Birthday once again, my Babiii. ❤️ Forever and always, I love you.</p>
+</div>
+</div>
+<script>
+for(let i=0;i<40;i++){let h=document.createElement('div');h.className='heart';h.innerHTML='❤';h.style.left=Math.random()*100+'vw';h.style.fontSize=(12+Math.random()*28)+'px';h.style.animationDuration=(5+Math.random()*6)+'s';document.body.appendChild(h);}
+for(let i=0;i<120;i++){let c=document.createElement('div');c.className='confetti';c.style.left=Math.random()*100+'vw';c.style.background=['gold','red','#fff'][i%3];c.style.animationDelay=(Math.random()*5)+'s';document.body.appendChild(c);}
+setInterval(()=>{let f=document.createElement('div');f.className='fire';f.style.left=Math.random()*100+'vw';f.style.top=(10+Math.random()*50)+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500)},120);
+</script>
+</body></html>
